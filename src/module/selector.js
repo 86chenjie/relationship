@@ -128,7 +128,8 @@ export function getSelectors(str){
                 let r_name = name.replace(match[0],'');
                 let num = zh2number(match[0]);
                 [x_name,r_name,name].forEach(function(name,index){
-                    let ids = cacheData[name];
+                    //let ids = cacheData[name];
+                    let ids = cacheData.get(name)
                     if(ids&&ids.length){
                         ids.forEach(function(i){
                             let id = i.replace(/(,[hw])$/,'&'+num+'$1').replace(/([^hw]+)$/,'$1&'+num);
@@ -139,7 +140,8 @@ export function getSelectors(str){
                     }
                 });
             }
-            items = items.concat(cacheData[name]||[]);
+            // items = items.concat(cacheData[name]||[]);
+            items = items.concat(cacheData.get(name)||[]);
         });
         // console.log('[keywords]',keywords);
         // 如找不到结果，再是否存在称呼的排行问题(不直接判断，因存在"大舅""三从父兄""三世祖"这样特俗含义的情况)
